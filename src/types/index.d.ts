@@ -1,10 +1,13 @@
 interface Customer {
+    _id: string;
     username: string;
     createdAt: Date;
+    fullname: string;
     email: string;
     phoneNumber: string;
     address: string;
     isAdmin: boolean;
+    cart: { bookID: string, quantity: number }[];
 }
 interface LoginState {
     username: string;
@@ -24,7 +27,7 @@ interface RegisterState {
     error: string;
 }
 interface CustomerState {
-    customer: Customer | {};
+    customer: Customer;
     accessToken: string;
 }
 

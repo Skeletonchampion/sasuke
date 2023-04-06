@@ -14,5 +14,10 @@ interface AuthContext {
 interface CustomerContext {
     customerState: CustomerState;
     customerDispatch: React.Dispatch<Action>;
-    authConfig: object
+    authConfig: object;
+    handleAddItemToCart: (bookID: string) => void;
+    handleRemoveItemFromCart: (bookID: string) => void;
+    handleDeleteItemFromCart: (bookID: string) => void;
+    handleUpdateCustomer: any;
+    handlePlaceOrder: any;
 }

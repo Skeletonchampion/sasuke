@@ -4,12 +4,31 @@ import { useCustomer } from "../hooks/CustomerContext";
 import { Footer } from "../components/Footer";
 import { NavBar } from "../components/NavBar";
 import { BookDetails } from "../components/BookDetails";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useGlobal } from "../hooks/globalContext";
 
 export function BookDetailsPage() {
     const [isLoading, setIsLoading] = React.useState(true);
 
+    const [book, setBook] = React.useState({
+        _id: "", title: "", authors: [], imgUrl: "", summary: "", category: "",
+        details: {
+            isbn10: "",
+            isbn13: "",
+            weight: "",
+            width: "",
+            height: "",
+            pages: 0,
+        },
+        publisher: "", releaseDate: new Date, price: 0
+    });
+
+    const { id } = useParams<{ id: string }>();
+
     const { checkAuth } = useAuth();
     const { customerState } = useCustomer();
+    const { URL } = useGlobal();
 
     React.useEffect(() => {
         (async () => {
@@ -17,6 +36,13 @@ export function BookDetailsPage() {
             setIsLoading(false);
         })();
     }, [customerState.accessToken]);
+
+    React.useEffect(() => {
+        (async () => {
+            const res = await axios.get(`${URL}/books/id/${id}`);
+            setBook(res.data[0]);
+        })();
+    }, []);
 
     return (
         <>
@@ -27,7 +53,7 @@ export function BookDetailsPage() {
                     :
                     <>
                         <NavBar customerState={customerState} />
-                        <BookDetails />
+                        <BookDetails book={book} />
                         <Footer />
                     </>
             }

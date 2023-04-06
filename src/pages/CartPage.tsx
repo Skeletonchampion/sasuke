@@ -1,14 +1,12 @@
 import React from "react";
-import { useAuth } from "../hooks/authContext";
-import { useCustomer } from "../hooks/CustomerContext";
+import { CartItems } from "../components/CartItems";
 import { Footer } from "../components/Footer";
 import { Main } from "../components/Main";
 import { NavBar } from "../components/NavBar";
-import { BookInitialState, BookReducer } from "../hooks/BookReducer";
-import { useGlobal } from "../hooks/globalContext";
-import axios from "axios";
+import { useAuth } from "../hooks/authContext";
+import { useCustomer } from "../hooks/CustomerContext";
 
-export function HomePage() {
+export function CartPage() {
     const [isLoading, setIsLoading] = React.useState(true);
 
     const { checkAuth } = useAuth();
@@ -30,7 +28,7 @@ export function HomePage() {
                     :
                     <>
                         <NavBar customerState={customerState} />
-                        <Main />
+                        <CartItems customerState={customerState} />
                         <Footer />
                     </>
             }

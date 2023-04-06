@@ -5,7 +5,7 @@ import library from "../images/library.jpeg"
 
 export function RegisterPage() {
     const { registerState, registerDispatch, performRegister } = useAuth();
-    const { message, error, isLoading, isError } = registerState;
+    const { error } = registerState;
 
     return (
         <>

@@ -14,13 +14,34 @@ export function GlobalProvider({ children }: ContextProviderProps) {
     const [ROUTE, setROUTE] = React.useState({
         POST_LOGIN: "auth/login",
         POST_REGISTER: "auth/register",
-        POST_TOKEN: "auth/token"
+        POST_TOKEN: "auth/token",
+
+        GET_BOOKS: "books/all",
+        GET_BOOKS_BY_CATEGORY: "books/category",
+        GET_BOOKS_BY_QUERY: "books/search",
+        GET_BOOKS_FROM_CART: "books/cart",
+
+        ADD_ITEM_TO_CART: "customer/cart/add",
+        REMOVE_ITEM_FROM_CART: "customer/cart/remove",
+        DELETE_ITEM_FROM_CART: "customer/cart/delete",
+
+        UPDATE_CUSTOMER: "customer/details/update",
+
+        PLACE_ORDER: "customer/order"
     });
-    const { POST_LOGIN, POST_REGISTER, POST_TOKEN } = ROUTE;
+    const { POST_LOGIN, POST_REGISTER, POST_TOKEN,
+            GET_BOOKS, GET_BOOKS_BY_CATEGORY, GET_BOOKS_BY_QUERY, GET_BOOKS_FROM_CART,
+            ADD_ITEM_TO_CART, REMOVE_ITEM_FROM_CART, DELETE_ITEM_FROM_CART,
+            UPDATE_CUSTOMER,
+            PLACE_ORDER } = ROUTE;
 
     return (
         <GlobalContext.Provider
-        value={{URL, POST_LOGIN, POST_REGISTER, POST_TOKEN
+        value={{URL, POST_LOGIN, POST_REGISTER, POST_TOKEN,
+                GET_BOOKS, GET_BOOKS_BY_CATEGORY, GET_BOOKS_BY_QUERY, GET_BOOKS_FROM_CART,
+                ADD_ITEM_TO_CART, REMOVE_ITEM_FROM_CART, DELETE_ITEM_FROM_CART,
+                UPDATE_CUSTOMER,
+                PLACE_ORDER
                 }}>
             {children}
         </GlobalContext.Provider>

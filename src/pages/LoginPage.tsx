@@ -5,7 +5,7 @@ import library from "../images/library.jpeg"
 
 export function LoginPage() {
     const { loginState, loginDispatch, performLogin } = useAuth();
-    const { message, error, isLoading, isError } = loginState;
+    const { error } = loginState;
 
     return (
         <>
