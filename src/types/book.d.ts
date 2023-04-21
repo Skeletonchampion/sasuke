@@ -1,3 +1,15 @@
+interface Review {
+    _id: string;
+    bookID: string;
+    customerID: {
+        _id: string;
+        username: string;
+    };
+    comment: string;
+    rating: string;
+    createdAt: Date;
+}
+
 interface BookState {
     _id: string;
     title: string;
@@ -16,4 +28,6 @@ interface BookState {
     publisher: string;
     releaseDate: Date;
     price: number;
+    reviews: Review[];
+    rating: number;
 }

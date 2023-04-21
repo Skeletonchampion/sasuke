@@ -65,7 +65,7 @@ export function AuthProvider({children}: ContextProviderProps) {
             }
 
             registerDispatch({ type: "REGISTER_SUCCESS" });
-            navigate("/");
+            navigate("/login");
         }
         catch(err: any) {
             throw new Error(err);
@@ -111,6 +111,8 @@ export function AuthProvider({children}: ContextProviderProps) {
     const performLogout = () => {
         Cookies.remove("refreshToken");
         customerState.accessToken = "";
+
+        navigate("/"); 
     }
 
     return (

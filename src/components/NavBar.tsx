@@ -1,12 +1,12 @@
 import React from "react";
 import { useAuth } from "../hooks/authContext";
 import logo from "../images/logo.png"
+import { CustomerDropDown } from "./CustomerDropDown";
 import { DropDown } from "./DropDown";
 
 export function NavBar(props: NavBarProps) {
     const dropDownRef = React.useRef<HTMLInputElement>(null);
     const { customerState } = props;
-    const { performLogout } = useAuth();
 
     return (
         <nav className="relative mb-6 bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
@@ -22,9 +22,9 @@ export function NavBar(props: NavBarProps) {
                     </span>
                     <input type="text" className="w-full border hover:border-blue-300 rounded-full bg-transparent py-1 pl-10 pr-5 text-lg text-gray-600 outline-none ring-1 ring-gray-200 focus:ring-1 focus:ring-blue-700 dark:text-zinc-900 dark:ring-zinc-600" placeholder="Enter keyword, title, author..." />
                 </div>
-                <div id="info" className="flex">
+                <div id="info" className="flex items-center">
                     {
-                        customerState.accessToken ? <a className="mx-2" href="" onClick={performLogout}>Logout</a> : <a className="mx-2" href="/login">Sign in</a>
+                        customerState.accessToken ? <CustomerDropDown /> : <a className="mx-2" href="/login">Sign in</a>
                     }
                     <a className="mx-2" href="#">Help</a>
                     <a href="/cart" role="button" className="relative flex mx-2">

@@ -11,7 +11,7 @@ import { useGlobal } from "../hooks/globalContext";
 export function BookDetailsPage() {
     const [isLoading, setIsLoading] = React.useState(true);
 
-    const [book, setBook] = React.useState({
+    const [book, setBook] = React.useState<BookState>({
         _id: "", title: "", authors: [], imgUrl: "", summary: "", category: "",
         details: {
             isbn10: "",
@@ -21,7 +21,8 @@ export function BookDetailsPage() {
             height: "",
             pages: 0,
         },
-        publisher: "", releaseDate: new Date, price: 0
+        publisher: "", releaseDate: new Date, price: 0,
+        reviews: [], rating: 0
     });
 
     const { id } = useParams<{ id: string }>();
@@ -40,7 +41,8 @@ export function BookDetailsPage() {
     React.useEffect(() => {
         (async () => {
             const res = await axios.get(`${URL}/books/id/${id}`);
-            setBook(res.data[0]);
+
+            setBook(res.data.book);
         })();
     }, []);
 
@@ -53,7 +55,7 @@ export function BookDetailsPage() {
                     :
                     <>
                         <NavBar customerState={customerState} />
-                        <BookDetails book={book} />
+                        <BookDetails book={book} setBook={setBook} />
                         <Footer />
                     </>
             }

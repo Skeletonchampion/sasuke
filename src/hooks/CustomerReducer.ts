@@ -56,7 +56,7 @@ export function customerReducer(state: CustomerState, Action: Action): CustomerS
         }
         case "CUSTOMER_PLACE_ORDER": {
             const newState = {...state};
-            newState.customer.cart = [];
+            newState.customer.cart = Action.payload;
 
             return newState;
         }

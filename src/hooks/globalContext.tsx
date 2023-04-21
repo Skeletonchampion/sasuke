@@ -27,13 +27,16 @@ export function GlobalProvider({ children }: ContextProviderProps) {
 
         UPDATE_CUSTOMER: "customer/details/update",
 
-        PLACE_ORDER: "customer/order"
+        PLACE_ORDER: "customer/order",
+
+        ADD_REVIEW: "customer/reviews/add"
     });
     const { POST_LOGIN, POST_REGISTER, POST_TOKEN,
             GET_BOOKS, GET_BOOKS_BY_CATEGORY, GET_BOOKS_BY_QUERY, GET_BOOKS_FROM_CART,
             ADD_ITEM_TO_CART, REMOVE_ITEM_FROM_CART, DELETE_ITEM_FROM_CART,
             UPDATE_CUSTOMER,
-            PLACE_ORDER } = ROUTE;
+            PLACE_ORDER,
+            ADD_REVIEW } = ROUTE;
 
     return (
         <GlobalContext.Provider
@@ -41,7 +44,8 @@ export function GlobalProvider({ children }: ContextProviderProps) {
                 GET_BOOKS, GET_BOOKS_BY_CATEGORY, GET_BOOKS_BY_QUERY, GET_BOOKS_FROM_CART,
                 ADD_ITEM_TO_CART, REMOVE_ITEM_FROM_CART, DELETE_ITEM_FROM_CART,
                 UPDATE_CUSTOMER,
-                PLACE_ORDER
+                PLACE_ORDER,
+                ADD_REVIEW
                 }}>
             {children}
         </GlobalContext.Provider>

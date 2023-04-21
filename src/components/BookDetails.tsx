@@ -8,19 +8,20 @@ import { Reviews } from "./Reviews";
 import { useCustomer } from "../hooks/CustomerContext";
 import { useNavigate } from "react-router-dom";
 
-export function BookDetails({ book }: { book: BookState }) {
+export function BookDetails({ book, setBook }: { book: BookState, setBook: React.Dispatch<React.SetStateAction<BookState>> }) {
     const authRef = React.useRef<HTMLInputElement>(null);
     const isAddedToCartRef = React.useRef<HTMLInputElement>(null);
 
     const [isLoading, setIsLoading] = React.useState(true);
+
+    const [refreshComponent, setRefreshComponent] = React.useState(false);
 
     const [isAddedToCart, setIsAddedTocart] = React.useState(false);
 
     const navigate = useNavigate();
 
     const { customerState, handleAddItemToCart } = useCustomer();
-
-    console.log(customerState)
+    
     return (
         <div>
             <div id="book-card" className="mt-4 mb-10 mx-8 px-20 py-6 flex shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
@@ -30,7 +31,7 @@ export function BookDetails({ book }: { book: BookState }) {
                         &&
                         <div className="w-[256] h-[384px] bg-white animate-pulse shadow-md self-center duration-300"></div>
                     }
-                    <img src={book.imgUrl} onLoad={() => setIsLoading(false)} className="w-64 mb-8" alt="book" />
+                    <img src={book.imgUrl} onLoad={() => setIsLoading(false)} className="w-64 mb-8" />
                     <div className="flex items-center">
                         <button onClick={() => {
                             handleAddItemToCart(book._id);
@@ -58,7 +59,7 @@ export function BookDetails({ book }: { book: BookState }) {
                     <h1 className="font-semibold text-3xl">{book.title} <span className="opacity-50">- {new Date(book.releaseDate).toDateString()}</span></h1>
                     <div id="info" className="relative mb-6">
                         <ul>
-                            <li>Authors: {book.authors.map(author => <a href="#" className="text-blue-400">{author}</a>)}</li>
+                            <li>Authors: {book.authors.map(author => <a key={`${author}-${book._id}`} href="#" className="text-blue-400">{author}</a>)}</li>
                             <div className="flex items-center mb-8">
                                 <FiveStars />
                                 <p className="ml-8 text-cyan-600 cursor-pointer">0 reviews</p>
@@ -68,7 +69,7 @@ export function BookDetails({ book }: { book: BookState }) {
                     <BookInfo book={book} />
                 </div>
             </div>
-            <Reviews />
+            <Reviews bookID={book._id} reviews={book.reviews} book={book} setBook={setBook} />
             <div ref={isAddedToCartRef} className="opacity-0 fixed bottom-0 right-10 z-50 rounded-md bg-lime-400 px-10 py-4">
                 <p>Successfully added to cart!</p>
             </div>

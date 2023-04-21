@@ -24,7 +24,7 @@ export function CustomerProvider({children}: ContextProviderProps) {
     const handleAddItemToCart = async (bookID: string) => {
         customerDispatch({ type: "CUSTOMER_ADD_ITEM", payload: bookID });
 
-        await axios.post(`${URL}/${ADD_ITEM_TO_CART}`, { customerID: customerState.customer._id, bookID: bookID });
+        await axios.post(`${URL}/${ADD_ITEM_TO_CART}`, { customerID: customerState.customer._id, bookID });
     }
     const handleRemoveItemFromCart = async (bookID: string) => {
         customerDispatch({ type: "CUSTOMER_REMOVE_ITEM", payload: bookID });
@@ -41,8 +41,8 @@ export function CustomerProvider({children}: ContextProviderProps) {
         const { fullname, phoneNumber, email, address } = details;
         await axios.post(`${URL}/${UPDATE_CUSTOMER}`, { customerID, details });
     }
-    const handlePlaceOrder = async (customerID: string, cart: { bookID: string, quantity: number }[]) => {
-        await axios.post(`${URL}/${PLACE_ORDER}`, { customerID, cart });
+    const handlePlaceOrder = async (customerID: string, cart: { bookID: string, quantity: number }[], totalPrice: number) => {
+        await axios.post(`${URL}/${PLACE_ORDER}`, { customerID, cart, totalPrice });
     }
 
     return (

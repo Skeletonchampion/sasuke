@@ -12,6 +12,7 @@ import { BooksByCategoryPage } from "./pages/BooksByCategoryPage";
 import { BooksByQueryPage } from "./pages/BooksByQueryPage";
 import { CartPage } from "./pages/CartPage";
 import { OrderConfirmedPage } from "./pages/OrderConfirmedPage";
+import { CustomerPage } from "./pages/CustomerPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <AuthProvider>
             <Routes>
               <Route path="/" element={<HomePage />} />
+              <Route path="/customer" element={<CustomerPage />} />
               <Route path="/category/:category" element={<BooksByCategoryPage />} />
               <Route path="/search/:query" element={<BooksByQueryPage />} />
               <Route path="/cart" element={<CartPage />} />

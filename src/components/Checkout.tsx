@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useCustomer } from "../hooks/CustomerContext";
 
-export function Checkout({ showForm, setShowForm, selectedItems }: { showForm: boolean, setShowForm: React.Dispatch<React.SetStateAction<boolean>>, selectedItems: { bookID: string, quantity: number }[] }) {
+export function Checkout({ showForm, setShowForm, selectedItems, totalPrice }: { showForm: boolean, setShowForm: React.Dispatch<React.SetStateAction<boolean>>, selectedItems: { bookID: string, quantity: number }[], totalPrice: number }) {
     const { customerState, customerDispatch, handleUpdateCustomer, handlePlaceOrder } = useCustomer();
     const { customer } = customerState;
 
@@ -23,9 +23,10 @@ export function Checkout({ showForm, setShowForm, selectedItems }: { showForm: b
             const details = { fullname: fullName, phoneNumber: phone, email: email, address: address }
 
             await handleUpdateCustomer(customerState.customer._id, details);
-            await handlePlaceOrder(customer._id, customer.cart);
+            await handlePlaceOrder(customer._id, selectedItems, totalPrice);
 
-            customerDispatch({ type: "CUSTOMER_PLACE_ORDER" })
+            const remainingItems = customer.cart.filter(item => !selectedItems.includes(item));
+            customerDispatch({ type: "CUSTOMER_PLACE_ORDER", payload: remainingItems })
 
             navigate("/confirm");
         }

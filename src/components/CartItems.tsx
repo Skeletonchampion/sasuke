@@ -57,6 +57,13 @@ export function CartItems({ customerState }: { customerState: CustomerState }) {
                         <input checked={allChecked} onChange={() => {
                             setAllChecked(!allChecked);
 
+                            if(!allChecked === true) {
+                                setSelectedItems(cart);
+                            }
+                            else {
+                                setSelectedItems([]);
+                            }
+
                             const tempIsCheckedList = [...isCheckedList];
                             tempIsCheckedList.forEach((item, index) => {
                                 tempIsCheckedList[index] = !allChecked;
@@ -90,20 +97,22 @@ export function CartItems({ customerState }: { customerState: CustomerState }) {
                                                             setAllChecked(false);
 
                                                             const newCart = [...cart];
-                                                            const uncheckedItemIndex = newCart.findIndex(item => item.bookID === book._id);
-                                                            newCart.splice(uncheckedItemIndex, 1);
+                                                            const newSelectedItems = [...selectedItems];
+                                                            const uncheckedItemIndex = newSelectedItems.findIndex(item => item.bookID === book._id);
+                                                            newSelectedItems.splice(uncheckedItemIndex, 1);
 
-                                                            setSelectedItems(newCart);
+                                                            setSelectedItems(newSelectedItems);
                                                         }
                                                         else {
-                                                            const isUnchecked = isCheckedList.find(item => item === true);
-                                                            if (isUnchecked) setAllChecked(true);
+                                                            const isUnchecked = isCheckedList.find(item => item === false);
+                                                            if (!isUnchecked) setAllChecked(true);
 
                                                             const newCart = [...cart];
+                                                            const newSelectedItems = [...selectedItems];
                                                             const checkedItemIndex = newCart.findIndex(item => item.bookID === book._id);
-                                                            newCart.splice(checkedItemIndex, 0, cart[index]);
-
-                                                            setSelectedItems(newCart);
+                                                            newSelectedItems.push(newCart[index]);
+                                                            
+                                                            setSelectedItems(newSelectedItems);
                                                         }
                                                         handleCheckingBox(index);
                                                     }} checked={isCheckedList[index]} className="mr-4 border-2 rounded-sm h-5 w-5 text-gray-600 outline-none" />
@@ -146,7 +155,7 @@ export function CartItems({ customerState }: { customerState: CustomerState }) {
                     </div>
                 </div>
             </div>
-            <Checkout showForm={showForm} setShowForm={setShowForm} selectedItems={selectedItems} />
+            <Checkout showForm={showForm} setShowForm={setShowForm} selectedItems={selectedItems} totalPrice={getTotalPrice()} />
         </div>
     )
 }
