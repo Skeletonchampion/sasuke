@@ -146,7 +146,7 @@ export function CartItems({ customerState }: { customerState: CustomerState }) {
                                     <div className="w-[935.08px] h-[600px] bg-white animate-pulse">
                                     </div>}
                     </ul>
-                    <div className="bg-white 2xl:ml-8 2xl:mt-0 mt-4 p-6 rounded-md">
+                    <div className="bg-white 2xl:ml-8 mx-4 p-6 rounded-md">
                         <p className="border-b border-gray-200 pb-4">Price <span className="float-right">{getTotalPrice()}$</span></p>
                         <p className="font-bold text-xl mt-4 mb-4">Total Price <span className="float-right text-red-600">{getTotalPrice()}$</span></p>
                         <button

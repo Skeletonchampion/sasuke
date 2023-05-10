@@ -70,7 +70,7 @@ export function BookList() {
         setPage(page);
         setIsLoading(false);
 
-        bookListRef.current?.scrollIntoView();
+        // bookListRef.current?.scrollIntoView();
     }
 
     const handleSetType = async (type: string) => {

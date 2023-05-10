@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/authContext";
 import logo from "../images/logo.png"
 import { CustomerDropDown } from "./CustomerDropDown";
@@ -7,6 +8,19 @@ import { DropDown } from "./DropDown";
 export function NavBar(props: NavBarProps) {
     const dropDownRef = React.useRef<HTMLInputElement>(null);
     const { customerState } = props;
+
+    const navigate = useNavigate();
+
+    const [title, setTitle] = React.useState("");
+
+    const handleSimpleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if(e.key !== "Enter") return;
+
+        let query = ``;
+        if(title) query += `title=${title}`
+
+        navigate(`/search?${query}`);
+    }
 
     return (
         <nav className="relative mb-6 bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
@@ -20,7 +34,10 @@ export function NavBar(props: NavBarProps) {
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </span>
-                    <input type="text" className="w-full border hover:border-blue-300 rounded-full bg-transparent py-1 pl-10 pr-5 text-lg text-gray-600 outline-none ring-1 ring-gray-200 focus:ring-1 focus:ring-blue-700 dark:text-zinc-900 dark:ring-zinc-600" placeholder="Enter keyword, title, author..." />
+                    <input type="text"
+                    onChange={(e) => setTitle(e.target.value)}
+                    onKeyDown={(e) => handleSimpleSearch(e)}
+                    className="w-full border hover:border-blue-300 rounded-full bg-transparent py-1 pl-10 pr-5 text-lg text-gray-600 outline-none ring-1 ring-gray-200 focus:ring-1 focus:ring-blue-700 dark:text-zinc-900 dark:ring-zinc-600" placeholder="Enter the title..." />
                 </div>
                 <div id="info" className="flex items-center">
                     {

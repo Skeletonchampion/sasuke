@@ -26,7 +26,7 @@ interface Order {
 
 export function CustomerPage() {
     const [isLoading, setIsLoading] = React.useState(true);
-    const [orders, setOrders] = React.useState<Order[]>();
+    const [orders, setOrders] = React.useState<Order[]>([] as Order[]);
     const [customerReviews, setCustomerReviews] = React.useState<any>();
     const [tab, setTab] = React.useState("orders");
 
@@ -103,7 +103,7 @@ export function CustomerPage() {
                                     &&
                                     <div>
                                         <ul className="" >
-                                            {orders?.map((order) => {
+                                            {orders.length > 0 ? orders.map((order) => {
                                                 return (
                                                     <li key={order._id} className="flex flex-col shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] mb-10 mx-20 px-4 py-6">
                                                         <div className="tooltip flex justify-center items-center border-b pb-4" data-tip="Successful Delivery">
@@ -124,7 +124,7 @@ export function CustomerPage() {
                                                         </div>
                                                     </li>
                                                 )
-                                            })}
+                                            }) : <h3 className="text-lg font-semibold text-center text-rose-500">No Order History!</h3>}
                                         </ul>
                                     </div>
                                 }

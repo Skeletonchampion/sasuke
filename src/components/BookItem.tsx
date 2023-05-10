@@ -31,13 +31,13 @@ export function BookItem({ book, quantity }: { book: Book, quantity?: number }) 
 
     return (
         <li className="w-40 flex flex-col">
-            <a href={`/book/id/${_id}`} className="relative inline-block w-36 h-[216px]">
+            <a target="_blank" href={`/book/id/${_id}`} className="relative inline-block w-36 h-[216px]">
                 {
                     isLoading
                     &&
-                    <div className="w-36 bg-white h-[216px] animate-pulse shadow-md self-center hover:shadow-[5px_5px_0px_0px_rgba(0,0,0)] duration-300"></div>
+                    <div className="absolute top-0 left-0 w-36 bg-white h-[216px] animate-pulse shadow-md self-center hover:shadow-[5px_5px_0px_0px_rgba(0,0,0)] duration-300"></div>
                 }
-                <img src={newImgUrl} onLoad={() => setIsLoading(false)} onError={handleImgSrc} className="w-36 h-[216px] shadow-md self-center hover:shadow-[5px_5px_0px_0px_rgba(0,0,0)] duration-300" alt="" />
+                <img src={newImgUrl} onLoad={() => setIsLoading(false)} onError={handleImgSrc} className="absolute top-0 left-0 w-36 h-[216px] shadow-md self-center hover:shadow-[5px_5px_0px_0px_rgba(0,0,0)] duration-300" alt="" />
                 {
                     quantity
                     &&

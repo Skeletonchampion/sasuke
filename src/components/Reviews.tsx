@@ -177,13 +177,13 @@ export function Reviews({ bookID, reviews, book, setBook }: ReviewsProps) {
             </div>
             {/* Comment Section */}
             <div className="border-y border-gray-200 mx-8 py-4 ">
-                <div className="flex">
-                    <div className="mb-10 flex items-start relative">
+                <div className="">
+                    <div className="mb-10 relative">
                         <ul>
                         {
                             reviews.length === 0
                                 ?
-                                <p>No customer reviews</p>
+                                <h3 className="text-lg font-semibold text-center">No customer reviews</h3>
                                 :
                                 reviews.slice().reverse().map(review => {
                                     return (
@@ -207,7 +207,7 @@ export function Reviews({ bookID, reviews, book, setBook }: ReviewsProps) {
                                 })
                         }
                         </ul>
-                        <Pagination previous="#" next="#" />
+                        {/* <Pagination previous="#" next="#" /> */}
                     </div>
                 </div>
             </div>

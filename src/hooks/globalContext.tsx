@@ -27,7 +27,7 @@ export function GlobalProvider({ children }: ContextProviderProps) {
 
         UPDATE_CUSTOMER: "customer/details/update",
 
-        PLACE_ORDER: "customer/order",
+        PLACE_ORDER: "customer/placeorder",
 
         ADD_REVIEW: "customer/reviews/add"
     });

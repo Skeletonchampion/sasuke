@@ -21,7 +21,7 @@ export function BookDetails({ book, setBook }: { book: BookState, setBook: React
     const navigate = useNavigate();
 
     const { customerState, handleAddItemToCart } = useCustomer();
-    
+
     return (
         <div>
             <div id="book-card" className="mt-4 mb-10 mx-8 px-20 py-6 flex shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
@@ -56,7 +56,7 @@ export function BookDetails({ book, setBook }: { book: BookState, setBook: React
                 </div>
 
                 <div className="flex flex-col ml-10">
-                    <h1 className="font-semibold text-3xl">{book.title} <span className="opacity-50">- {new Date(book.releaseDate).toDateString()}</span></h1>
+                    <h1 className="font-semibold text-3xl">{book.title} <span className="opacity-50">- {!isLoading ? new Date(book.releaseDate).toDateString() : ""}</span></h1>
                     <div id="info" className="relative mb-6">
                         <ul>
                             <li>Authors: {book.authors.map(author => <a key={`${author}-${book._id}`} href="#" className="text-blue-400">{author}</a>)}</li>

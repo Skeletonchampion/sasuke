@@ -31,3 +31,16 @@ interface BookState {
     reviews: Review[];
     rating: number;
 }
+
+interface OrderedBook {
+    book: BookState;
+    quantity: number;
+}
+
+interface Order {
+    _id: string;
+    customerID: string;
+    items: OrderedBook[];
+    orderDate: Date;
+    totalPrice: number;
+}
